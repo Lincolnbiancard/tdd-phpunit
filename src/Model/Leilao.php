@@ -6,6 +6,7 @@ class Leilao
 {
     private array $lances;
     private String $descricao;
+    private string $status = "initiated";
 
     public function __construct(string $descricao)
     {
@@ -15,14 +16,18 @@ class Leilao
 
     public function recebeLance(Lance $lance)
     {
+        if ($this->getStatus() === 'finished') {
+            throw new \DomainException('Leilão finalizado não pode receber lances');
+        }
+
         if (!empty($this->lances) && $this->belongsToTheLastUser($lance)) {
-            return;
+            throw new \DomainException('Usuário não pode propor 2 lances consecutivos');
         }
 
         $usuario = $lance->getUsuario();
         $totalLancesUsuario = $this->quantityOfBidsPerUser($usuario);
         if ($totalLancesUsuario >= 5) {
-            return;
+            throw new \DomainException('Limite de 5 lances por uisuário excedido');
         }
 
         $this->lances[] = $lance;
@@ -62,5 +67,18 @@ class Leilao
             },
             0
         );
+    }
+
+    public function finished(): string
+    {
+        return $this->status = "finished";
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus(): string
+    {
+        return $this->status;
     }
 }

@@ -10,9 +10,10 @@ use PHPUnit\Framework\TestCase;
 
 class LeilaoTest extends TestCase
 {
-
     public function testLeilaoNaoDeveAceitarMaisDe5LancesPorUsuario()
     {
+        $this->expectException(\DomainException::class);
+        $this->expectExceptionMessage("Limite de 5 lances por uisuário excedido");
         $leilao = new Leilao('Brasília Amarela');
         $joao = new Usuario('João');
         $maria = new Usuario('Maria');
@@ -28,9 +29,6 @@ class LeilaoTest extends TestCase
         $leilao->recebeLance(new Lance($joao, 5000));
         $leilao->recebeLance(new Lance($maria, 5500));
         $leilao->recebeLance(new Lance($joao, 6000));
-
-        static::assertCount(10, $leilao->getLances());
-        static::assertEquals(5500, $leilao->getLances()[array_key_last($leilao->getLances())]->getValor());
     }
 
     /**
@@ -50,14 +48,13 @@ class LeilaoTest extends TestCase
 
     public function testLeilaoNaoDeveReceberLancesRepetidos()
     {
+        $this->expectException(\DomainException::class);
+        $this->expectExceptionMessage("Usuário não pode propor 2 lances consecutivos");
         $leilao = new Leilao('Corsa Ret 0km');
         $babi = new Usuario('Babi');
 
         $leilao->recebeLance(new Lance($babi, 1000));
         $leilao->recebeLance(new Lance($babi, 1500));
-
-        static::assertCount(1, $leilao->getLances());
-        static::assertEquals(1000, $leilao->getLances()[0]->getValor());
     }
 
     public function generatorBids(): array
@@ -76,5 +73,15 @@ class LeilaoTest extends TestCase
             'Valor esperado com 2 lances' => [2, $auction2, [1900, 2000]],
             'Valor esperado com 1 lance' => [1, $auction, [50000]],
         ];
+    }
+
+    public function testLeilaoFinalizadoNaoPodeSerAvaliado()
+    {
+        $this->expectException(\DomainException::class);
+        $this->expectExceptionMessage("Leilão finalizado não pode receber lances");
+        $auction = new Leilao('Fiat 147 0 km');
+        $auction->finished();
+        $maria = new Usuario('Maria');
+        $auction->recebeLance(new Lance($maria, 50000));
     }
 }

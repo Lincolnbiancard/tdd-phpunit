@@ -3,6 +3,7 @@ Leilao (TDD\Leilao\Tests\Model\Leilao)
  [x] Leilao deve receber lance with data set "Valor esperado com 2 lances"
  [x] Leilao deve receber lance with data set "Valor esperado com 1 lance"
  [x] Leilao nao deve receber lances repetidos
+ [x] Leilao finalizado nao pode ser avaliado
 
 Avaliador (TDD\Leilao\Tests\Service\Avaliador)
  [x] Avaliador deve encontrar maior lance do leilao with data set "Ordem crescente"
