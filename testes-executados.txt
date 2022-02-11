@@ -14,4 +14,5 @@ Avaliador (TDD\Leilao\Tests\Service\Avaliador)
  [x] Avaliador deve buscar 3 maiores lances with data set "Ordem crescente"
  [x] Avaliador deve buscar 3 maiores lances with data set "Ordem decrescente"
  [x] Avaliador deve buscar 3 maiores lances with data set "Ordem aleatória"
+ [x] Leilao vazio nao pode ser avaliado
 

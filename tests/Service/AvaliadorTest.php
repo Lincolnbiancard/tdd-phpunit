@@ -131,4 +131,12 @@ class AvaliadorTest extends TestCase
         ];
     }
 
+    public function   testLeilaoVazioNaoPodeSerAvaliado()
+    {
+        $this->expectException(\DomainException::class);
+        $this->expectExceptionMessage("Não é possível avaliar leilão vazio");
+        $auction = new Leilao('Fiat 147 0 km');
+        $this->evaluator->avalia($auction);
+    }
+
 }
