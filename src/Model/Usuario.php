@@ -1,6 +1,6 @@
 <?php
 
-namespace Alura\Leilao\Model;
+namespace TDD\Leilao\Model;
 
 class Usuario
 {

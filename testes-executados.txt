@@ -1,9 +1,10 @@
-Leilao (Alura\Leilao\Tests\Model\Leilao)
+Leilao (TDD\Leilao\Tests\Model\Leilao)
+ [x] Leilao nao deve aceitar mais de 5 lances por usuario
  [x] Leilao deve receber lance with data set "Valor esperado com 2 lances"
  [x] Leilao deve receber lance with data set "Valor esperado com 1 lance"
  [x] Leilao nao deve receber lances repetidos
 
-Avaliador (Alura\Leilao\Tests\Service\Avaliador)
+Avaliador (TDD\Leilao\Tests\Service\Avaliador)
  [x] Avaliador deve encontrar maior lance do leilao with data set "Ordem crescente"
  [x] Avaliador deve encontrar maior lance do leilao with data set "Ordem decrescente"
  [x] Avaliador deve encontrar maior lance do leilao with data set "Ordem aleatória"

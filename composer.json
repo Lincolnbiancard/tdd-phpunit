@@ -1,7 +1,7 @@
 {
     "autoload": {
         "psr-4": {
-            "Alura\\Leilao\\": "src/"
+            "TDD\\Leilao\\": "src/"
         }
     },
     "require-dev": {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Alura\Leilao\Tests\Service;
+namespace TDD\Leilao\Tests\Service;
 
-use Alura\Leilao\Model\Lance;
-use Alura\Leilao\Model\Leilao;
-use Alura\Leilao\Model\Usuario;
-use Alura\Leilao\Service\Avaliador;
+use TDD\Leilao\Model\Lance;
+use TDD\Leilao\Model\Leilao;
+use TDD\Leilao\Model\Usuario;
+use TDD\Leilao\Service\Avaliador;
 use PHPUnit\Framework\TestCase;
 
 class AvaliadorTest extends TestCase

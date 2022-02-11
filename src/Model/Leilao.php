@@ -1,6 +1,6 @@
 <?php
 
-namespace Alura\Leilao\Model;
+namespace TDD\Leilao\Model;
 
 class Leilao
 {
@@ -18,6 +18,13 @@ class Leilao
         if (!empty($this->lances) && $this->belongsToTheLastUser($lance)) {
             return;
         }
+
+        $usuario = $lance->getUsuario();
+        $totalLancesUsuario = $this->quantityOfBidsPerUser($usuario);
+        if ($totalLancesUsuario >= 5) {
+            return;
+        }
+
         $this->lances[] = $lance;
     }
 
@@ -37,5 +44,23 @@ class Leilao
     {
         $lastBid = $this->lances[count($this->lances) - 1];
         return $bid->getUsuario() == $lastBid->getUsuario();
+    }
+
+    /**
+     * @param $usuario
+     * @return int
+     */
+    public function quantityOfBidsPerUser($usuario): int
+    {
+        return array_reduce(
+            $this->lances,
+            function (int $totalAcumulado, Lance $lanceAtual) use ($usuario) {
+                if ($lanceAtual->getUsuario() == $usuario) {
+                    return $totalAcumulado + 1;
+                }
+                return $totalAcumulado;
+            },
+            0
+        );
     }
 }
